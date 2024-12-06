@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inivak Edu Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background: #ffffff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            top: 88px;
+        }
+
+        .form-container h1 {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555555;
+        }
+
+        .form-container input,
+        .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .form-container input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .form-container input:focus,
+        .form-container select:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Register</h1>
+        <form id="infoForm">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+            
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+            
+            <label for="whatsapp">WhatsApp Number:</label>
+            <input type="text" id="whatsapp" name="whatsapp" placeholder="94772520113 යන ආකෘතියට අංකය ඇතුලත් කරන්න." required>
+            
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            
+            <label for="password">Password:</label>
+            <input type="text" id="password" name="password" placeholder="Enter your password" required>
+
+            <label for="teacher">Teacher Name:</label>
+            <select id="teacher" name="teacher" required>
+                <option value="Indika Paranavithana">Indika Paranavithana</option>
+                <option value="Bandula Vithange">Bandula Vithange</option>
+            </select>
+
+            <label>
+                <input type="checkbox" id="pird"> නියමයන් හා කොන්දේසි සමග එකගද?
+            </label>
+            
+            <button type="button" id="sendButton">Send ▷</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('sendButton').addEventListener('click', function () {
+            // Get input values
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const whatsapp = document.getElementById('whatsapp').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const teacher = document.getElementById('teacher').value;
+            const pird = document.getElementById('pird').checked ? 'එකග වේ.' : 'එකග නොවේ.';
+
+            // Validate phone number (Optional)
+            if (!/^\d{10,15}$/.test(whatsapp)) {
+                alert('Please enter a valid WhatsApp number.');
+                return;
+            }
+
+            // Generate idcode
+            let idCode = '';
+            if (teacher === 'Indika Paranavithana') {
+                idCode = 'IP001';
+            } else if (teacher === 'Bandula Vithange') {
+                idCode = 'BV002';
+            }
+
+            // Generate username
+            const username = `${lastName}${idCode}`;
+
+            // Construct message
+            const message = `
+> ${firstName} මෙය කිසිසේත්ම සංස්කරණය නොකරන්න.
+
+*මම Inivak Edu සමග ලියාපදිංචි කරන්න.*
+
+Name: ${firstName} ${lastName}
+WhatsApp Number: ${whatsapp}
+Email: ${email}
+[රිකෝඩින් බැලිමට මෙම ලිපිනය තිබීම අනිවාර්ය වේ.]
+Teacher Name: ${teacher}
+මම Inivak නියමයන් හා කොන්දේසි සමග  ${pird}
+
+-------------------
+Account Details
+
+User Name: ${username}
+Password: ${password}
+            
+> inivak ebill service`;
+
+            // Open WhatsApp link
+            const whatsappLink = `https://wa.me/+94772520113?text=${encodeURIComponent(message.trim())}`;
+            window.open(whatsappLink, '_blank');
+
+            // Clear input fields
+            document.getElementById('infoForm').reset();
+        });
+    </script>
+</body>
+</html>
