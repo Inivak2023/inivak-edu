@@ -215,8 +215,100 @@
         }
   
     </style>
+      <style>
+        /* Initial body style for loading screen */
+        #loading-screen {
+          margin: 0;
+          height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: black;
+          overflow: hidden;
+          z-index: 10000;
+        }
+    
+        /* Container for the loader */
+        .loader {
+            width: 51%;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        /* Image animation */
+        .loader-box {
+            position: absolute;
+            top: 0;
+      
+            width: 160px;
+            height: 100px;
+            animation: marquee 3s linear infinite;
+            z-index: 2;
+        }
+    
+    
+    
+    
+        .box {
+            width: 164px;
+            height: 106px;
+            background-color: #000000;
+        }
+
+        #main-content{
+            display: none;
+        }
+    
+        /* Marquee animation */
+        @keyframes marquee {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(100vw); 
+          }
+        }
+    
+      
+    
+     
+      </style>
 </head>
 <body>
+    <div id="loading-screen">
+        <div class="loader">
+          <div class="loader-box">
+              <div class="box"></div>
+          </div>
+      
+      
+          <div style="display: grid;">
+              <img src="web-files/loder-b.png" alt="" style="width: 201px;z-index: 1;">
+              <img src="web-files/inivak logo.jpg" alt="" style="width: 129px;position: relative;left: 37px;top: -129px;z-index: 3;border-radius: 10px;">
+          </div>
+        </div>
+      </div>
+
+      <script>
+        // JavaScript to remove the loader and show the main content
+        document.addEventListener("DOMContentLoaded", () => {
+        const loader = document.getElementById("loading-screen");
+        const mainContent = document.getElementById("main-content");
+    
+        // තත්පර 30කින් ලෝඩර් එක අයින් කරන්න
+        setTimeout(() => {
+            loader.style.display = "none"; // ලෝඩර් එක සඟවන්න
+            mainContent.style.display = "block"; // මූලික කන්ටෙන්ට් එක පෙන්වන්න
+        }, 15000); // 30 seconds
+    });
+       
+      </script>
+
+      <div id="main-content">
     <header>
         <img src="web-files/inivak logo.jpg" alt="" class="header-logo">
         <a href="Regester.html">
@@ -323,5 +415,7 @@
         <h3 class="f-text">&copy;Inivak2024 | teems and condititions</h3>
        
     </footer>
+</div>
+  
 </body>
 </html>
